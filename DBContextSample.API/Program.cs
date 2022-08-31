@@ -6,6 +6,7 @@ using DBContextSample.API.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
+#region Before build
 
 builder.Services.AddControllers();
 
@@ -27,8 +28,11 @@ builder.Services
         optionsLifetime: ServiceLifetime.Singleton
     );
 
+#endregion
 
 var app = builder.Build();
+
+#region After build
 
 app.UseMiddleware<RequestLoggingMiddleware>();
 
@@ -47,6 +51,8 @@ var configuration = app.Services.GetRequiredService<IConfiguration>();
 var loggerFactory = app.Services.GetRequiredService<ILoggerFactory>();
 loggerFactory.AddSeq(configuration.GetSection("Logging:Seq"));
 DbContextLogger.LoggerFactory = loggerFactory;
+
+#endregion
 
 
 app.Run();
