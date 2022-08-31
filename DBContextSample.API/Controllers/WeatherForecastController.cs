@@ -10,10 +10,6 @@ namespace DBContextSample.API.Controllers
         {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
-        private readonly CoreContext _context;
-
-        public WeatherForecastController(CoreContext context) 
-            => _context = context;
 
 
         [HttpGet(Name = "GetWeatherForecast")]

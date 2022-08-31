@@ -10,7 +10,7 @@ using System.Reflection;
 
 namespace DBContextSample.Context
 {
-    public partial class SampleContext : DbContext, ITransactionContext, ITrackedPropertiesContext
+    public abstract partial class SampleContext : DbContext, ITransactionContext, ITrackedPropertiesContext
     {
         private static readonly ILogger _logger = DbContextLogger.CreateLogger<SampleContext>();
 

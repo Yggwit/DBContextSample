@@ -1,9 +1,12 @@
-﻿using DBContextSample.Entities.Entities;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
+using DBContextSample.Entities.Entities;
 
 namespace DBContextSample.Context
 {
-    public partial class SampleContext : DbContext
+    public abstract partial class SampleContext : DbContext
     {
         public virtual DbSet<Person> People { get; set; }
 

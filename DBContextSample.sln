@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32819.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBContextSample.Test", "DBContextSample\DBContextSample.Test.csproj", "{2B1D8FED-0363-4F80-ABF2-C02934E5360D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DBContextSample.Test", "DBContextSample\DBContextSample.Test.csproj", "{2B1D8FED-0363-4F80-ABF2-C02934E5360D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBContextSample.Context", "DBContextSample.Context\DBContextSample.Context.csproj", "{E31A8FFB-F206-40E0-B436-14C6358A7B37}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DBContextSample.Context", "DBContextSample.Context\DBContextSample.Context.csproj", "{E31A8FFB-F206-40E0-B436-14C6358A7B37}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBContextSample.Entities", "DBContextSample.Entities\DBContextSample.Entities.csproj", "{BDF08E81-1CFC-4353-9D76-5283F8754916}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DBContextSample.Entities", "DBContextSample.Entities\DBContextSample.Entities.csproj", "{BDF08E81-1CFC-4353-9D76-5283F8754916}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBContextSample.Utils", "DBContextSample.Utils\DBContextSample.Utils.csproj", "{19C84D89-A66E-4523-955B-6A200839FE3A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DBContextSample.Utils", "DBContextSample.Utils\DBContextSample.Utils.csproj", "{19C84D89-A66E-4523-955B-6A200839FE3A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBContextSample.Context.InMemory", "DBContextSample.Context.InMemory\DBContextSample.Context.InMemory.csproj", "{D0036DB9-14FB-4943-9FDE-E02296C2E9B9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DBContextSample.Context.InMemory", "DBContextSample.Context.InMemory\DBContextSample.Context.InMemory.csproj", "{D0036DB9-14FB-4943-9FDE-E02296C2E9B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBContextSample.API", "DBContextSample.API\DBContextSample.API.csproj", "{778FD04D-7882-4D08-BB3C-DF6612038700}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBContextSample.API", "DBContextSample.API\DBContextSample.API.csproj", "{DC6FC488-B6F8-4C69-AC20-31DB0B9C54EC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +41,10 @@ Global
 		{D0036DB9-14FB-4943-9FDE-E02296C2E9B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D0036DB9-14FB-4943-9FDE-E02296C2E9B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D0036DB9-14FB-4943-9FDE-E02296C2E9B9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{778FD04D-7882-4D08-BB3C-DF6612038700}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{778FD04D-7882-4D08-BB3C-DF6612038700}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{778FD04D-7882-4D08-BB3C-DF6612038700}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{778FD04D-7882-4D08-BB3C-DF6612038700}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC6FC488-B6F8-4C69-AC20-31DB0B9C54EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC6FC488-B6F8-4C69-AC20-31DB0B9C54EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC6FC488-B6F8-4C69-AC20-31DB0B9C54EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC6FC488-B6F8-4C69-AC20-31DB0B9C54EC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
