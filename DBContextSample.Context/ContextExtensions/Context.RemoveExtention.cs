@@ -1,5 +1,4 @@
 ﻿using DBContextSample.Entities.Entities;
-using Microsoft.EntityFrameworkCore;
 
 namespace DBContextSample.Context
 {

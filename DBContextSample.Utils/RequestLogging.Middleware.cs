@@ -1,7 +1,9 @@
-﻿using System.Diagnostics;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
+using System.Diagnostics;
 using System.Text;
 
-namespace DBContextSample.API.Middlewares
+namespace DBContextSample.Utils
 {
     public class RequestLoggingMiddleware
     {

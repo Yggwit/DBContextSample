@@ -1,9 +1,3 @@
-global using DBContextSample.Context;
-global using DBContextSample.Context.Helpers;
-global using Microsoft.EntityFrameworkCore;
-
-using DBContextSample.API.Middlewares;
-
 var builder = WebApplication.CreateBuilder(args);
 
 #region Before build
@@ -13,7 +7,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Configuration.AddJsonFile("hosting.json", optional: false);
+builder.Configuration
+    .AddJsonFile("hosting.json", optional: false);
 
 builder.Services
     .AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -34,6 +29,9 @@ var app = builder.Build();
 
 #region After build
 
+var configuration = app.Services.GetRequiredService<IConfiguration>();
+var loggerFactory = app.Services.GetRequiredService<ILoggerFactory>();
+
 app.UseMiddleware<RequestLoggingMiddleware>();
 
 app.UseSwagger();
@@ -45,10 +43,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-
-var configuration = app.Services.GetRequiredService<IConfiguration>();
-
-var loggerFactory = app.Services.GetRequiredService<ILoggerFactory>();
 loggerFactory.AddSeq(configuration.GetSection("Logging:Seq"));
 DbContextLogger.LoggerFactory = loggerFactory;
 

@@ -1,6 +1,5 @@
 ﻿using DBContextSample.Context.Helpers;
 using DBContextSample.Context.Interfaces;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using Microsoft.EntityFrameworkCore.Storage;

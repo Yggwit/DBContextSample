@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DBContextSample.Utils", "DB
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DBContextSample.Context.InMemory", "DBContextSample.Context.InMemory\DBContextSample.Context.InMemory.csproj", "{D0036DB9-14FB-4943-9FDE-E02296C2E9B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBContextSample.API", "DBContextSample.API\DBContextSample.API.csproj", "{DC6FC488-B6F8-4C69-AC20-31DB0B9C54EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DBContextSample.API", "DBContextSample.API\DBContextSample.API.csproj", "{DC6FC488-B6F8-4C69-AC20-31DB0B9C54EC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBContextSample.Gateway", "DBContextSample.Gateway\DBContextSample.Gateway.csproj", "{7FD13845-7D17-490F-B873-DBC23172CF03}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{DC6FC488-B6F8-4C69-AC20-31DB0B9C54EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC6FC488-B6F8-4C69-AC20-31DB0B9C54EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC6FC488-B6F8-4C69-AC20-31DB0B9C54EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FD13845-7D17-490F-B873-DBC23172CF03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FD13845-7D17-490F-B873-DBC23172CF03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FD13845-7D17-490F-B873-DBC23172CF03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FD13845-7D17-490F-B873-DBC23172CF03}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

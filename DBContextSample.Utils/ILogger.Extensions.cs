@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 
-namespace DBContextSample
+namespace DBContextSample.Utils
 {
     public static class ILoggerExtensions
     {

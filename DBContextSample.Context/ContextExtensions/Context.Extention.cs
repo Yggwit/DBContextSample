@@ -1,5 +1,4 @@
 ﻿using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore;
 
 namespace DBContextSample.Context
 {

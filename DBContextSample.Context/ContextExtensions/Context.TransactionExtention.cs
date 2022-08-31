@@ -1,5 +1,4 @@
 ﻿using DBContextSample.Context.Interfaces;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using System.Data.Common;
 

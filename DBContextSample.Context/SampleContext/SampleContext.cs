@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
-using DBContextSample.Entities.Entities;
+﻿using DBContextSample.Entities.Entities;
 
 namespace DBContextSample.Context
 {

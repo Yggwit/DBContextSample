@@ -1,6 +1,5 @@
 ﻿using DBContextSample.Context.Helpers;
 using DBContextSample.Context.Interfaces;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace DBContextSample.Context

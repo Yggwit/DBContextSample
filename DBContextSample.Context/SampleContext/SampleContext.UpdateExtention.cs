@@ -1,6 +1,5 @@
 ﻿using DBContextSample.Entities.Entities;
 using EFCore.BulkExtensions;
-using Microsoft.EntityFrameworkCore;
 using System.Globalization;
 using System.Linq.Expressions;
 using System.Reflection;

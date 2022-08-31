@@ -1,7 +1,6 @@
 ﻿using Dapper;
 using DBContextSample.Context.Helpers;
 using DBContextSample.Context.Interfaces;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System.Data;
 

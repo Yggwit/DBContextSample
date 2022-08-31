@@ -1,6 +1,5 @@
 ﻿using Dapper;
 using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 using System.Text.Json;
