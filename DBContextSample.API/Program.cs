@@ -1,6 +1,7 @@
 global using DBContextSample.Context;
 global using DBContextSample.Context.Helpers;
 global using Microsoft.EntityFrameworkCore;
+
 using DBContextSample.API.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
