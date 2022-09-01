@@ -39,4 +39,8 @@
     <ProjectReference Include="..\DBContextSample.Utils\DBContextSample.Utils.csproj" />
   </ItemGroup>
 
+	<ItemGroup>
+		<InternalsVisibleTo Include="DBContextSample.Test"  />
+	</ItemGroup>
+
 </Project>

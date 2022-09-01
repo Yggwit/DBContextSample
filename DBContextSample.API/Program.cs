@@ -1,3 +1,6 @@
+using DBContextSample.API.Services;
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 #region Before build
@@ -22,6 +25,9 @@ builder.Services
         contextLifetime: ServiceLifetime.Scoped,
         optionsLifetime: ServiceLifetime.Singleton
     );
+
+builder.Services
+    .RegisterServices();
 
 #endregion
 

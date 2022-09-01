@@ -13,7 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Configuration
     .AddJsonFile("hosting.json", false, true)
-    .AddJsonFile("ocelot.json");
+    .AddJsonFile("ocelot.json", false, true);
 
 builder.Services
     .AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
