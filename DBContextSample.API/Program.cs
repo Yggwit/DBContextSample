@@ -11,7 +11,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Configuration
-    .AddJsonFile("hosting.json", optional: false);
+    .AddJsonFile("hosting.json", false, true);
 
 builder.Services
     .AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -40,6 +40,9 @@ var loggerFactory = app.Services.GetRequiredService<ILoggerFactory>();
 
 app.UseMiddleware<RequestLoggingMiddleware>();
 
+loggerFactory.AddSeq(configuration.GetSection("Logging:Seq"));
+DbContextLogger.LoggerFactory = loggerFactory;
+
 app.UseSwagger();
 app.UseSwaggerUI();
 
@@ -48,9 +51,6 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
-
-loggerFactory.AddSeq(configuration.GetSection("Logging:Seq"));
-DbContextLogger.LoggerFactory = loggerFactory;
 
 #endregion
 

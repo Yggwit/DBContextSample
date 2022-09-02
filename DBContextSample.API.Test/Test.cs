@@ -2,7 +2,7 @@ using DBContextSample.API.Services;
 using DBContextSample.Context;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DBContextSample.Test
+namespace DBContextSample.API.Test
 {
     public class Test
     {

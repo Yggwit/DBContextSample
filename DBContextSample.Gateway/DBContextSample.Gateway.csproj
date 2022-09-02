@@ -8,11 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="appsettings.json" />
-    <None Remove="hosting.json" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Include="appsettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
@@ -40,7 +35,7 @@
   </ItemGroup>
 
 	<ItemGroup>
-		<InternalsVisibleTo Include="DBContextSample.Test"  />
+		<InternalsVisibleTo Include="DBContextSample.Gateway.Test"  />
 	</ItemGroup>
 
 </Project>

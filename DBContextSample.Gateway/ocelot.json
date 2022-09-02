@@ -1,7 +1,7 @@
 ﻿{
   "Routes": [
     {
-      "DownstreamPathTemplate": "/api/People/{id}",
+      "DownstreamPathTemplate": "/api/{everything}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -9,19 +9,19 @@
           "Port": 5043
         }
       ],
-      "UpstreamPathTemplate": "/api/People/{id}",
+      "UpstreamPathTemplate": "/api/{everything}",
       "UpstreamHttpMethod": [ "Get" ]
     },
     {
-      "DownstreamPathTemplate": "/api/People",
+      "DownstreamPathTemplate": "/{everything}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5043
+          "Port": 5033
         }
       ],
-      "UpstreamPathTemplate": "/api/People",
+      "UpstreamPathTemplate": "/{everything}",
       "UpstreamHttpMethod": [ "Get" ]
     }
   ],
