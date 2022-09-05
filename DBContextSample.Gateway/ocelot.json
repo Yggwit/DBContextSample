@@ -6,11 +6,18 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
+          "Port": 5044
+        },
+        {
+          "Host": "localhost",
           "Port": 5043
         }
       ],
       "UpstreamPathTemplate": "/api/{everything}",
-      "UpstreamHttpMethod": [ "Get" ]
+      "UpstreamHttpMethod": [ "Get" ],
+      "LoadBalancerOptions": {
+        "Type": "LeastConnection"
+      }
     },
     {
       "DownstreamPathTemplate": "/{everything}",

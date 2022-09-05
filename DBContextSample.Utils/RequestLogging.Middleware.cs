@@ -45,6 +45,7 @@ namespace DBContextSample.Utils
                     UserLogon = _httpContext?.HttpContext?.User?.Identity?.Name ?? default!,
                     Method = context.Request.Method,
                     RequestPath = context.Request.Path,
+                    RequestHost = context.Request.Host.ToString(),
                     Parameters = parameters,
                     StatusCode = (short)context.Response.StatusCode
                 });
@@ -97,6 +98,7 @@ namespace DBContextSample.Utils
         public string? UserLogon { get; set; }
         public string? Method { get; set; }
         public string? RequestPath { get; set; }
+        public string? RequestHost { get; set; }
         public string? Parameters { get; set; }
         public short StatusCode { get; set; }
 

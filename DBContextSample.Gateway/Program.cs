@@ -30,9 +30,9 @@ var app = builder.Build();
 var configuration = app.Services.GetRequiredService<IConfiguration>();
 var loggerFactory = app.Services.GetRequiredService<ILoggerFactory>();
 
-app.UseMiddleware<RequestLoggingMiddleware>();
-
 loggerFactory.AddSeq(configuration.GetSection("Logging:Seq"));
+
+app.UseMiddleware<RequestLoggingMiddleware>();
 
 app.UseOcelot().Wait();
 

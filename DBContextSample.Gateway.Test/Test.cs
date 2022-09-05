@@ -1,15 +1,21 @@
+using Microsoft.Extensions.Configuration;
+
 namespace DBContextSample.Gateway.Test
 {
     public class Test
     {
-        private HttpClient _client;
+        private readonly HttpClient _client = new();
 
         [SetUp]
         public void Setup()
         {
-            var application = new ApplicationFactory();
+            IConfiguration configuration = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json", false, true)
+                .Build();
 
-            _client = application.CreateClient();
+            string clientUrl = configuration.GetValue<string>("Client:Url");
+
+            _client.BaseAddress = new Uri(clientUrl);
         }
 
 
@@ -25,6 +31,26 @@ namespace DBContextSample.Gateway.Test
                 var people = await response.Content.ReadAsStringAsync();
 
                 Assert.That(people, Is.Not.Null);
+            }
+            catch (Exception ex)
+            {
+                Assert.That(ex, Is.Null);
+            }
+        }
+
+        [Test]
+        public async Task Http_Test2()
+        {
+            try
+            {
+                await Task.WhenAll(
+                    _client.GetAsync("/api/people"),
+                    _client.GetAsync("/api/people"),
+                    _client.GetAsync("/api/people"),
+                    _client.GetAsync("/api/people"),
+                    _client.GetAsync("/api/people"),
+                    _client.GetAsync("/api/people")
+                );
             }
             catch (Exception ex)
             {

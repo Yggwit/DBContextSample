@@ -13,7 +13,7 @@ namespace DBContextSample.API.Test
         protected override IHost CreateHost(IHostBuilder builder)
         {
             IConfiguration configuration = new ConfigurationBuilder()
-                .AddJsonFile("appconfig.json", true, true)
+                .AddJsonFile("appsettings.json", true, true)
                 .Build();
 
             builder
