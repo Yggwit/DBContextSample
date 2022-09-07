@@ -1,58 +1,73 @@
 using DBContextSample.API.Services;
 
+namespace DBContextSample.API
+{
+    public partial class Program
+    {
+        public static async Task Main(string[] args)
+            => await GetApp(args).RunAsync();
 
-var builder = WebApplication.CreateBuilder(args);
+        public static WebApplication GetApp(string[] args)
+        {
+            var builder = WebApplication.CreateBuilder(args);
 
-#region Before build
+            #region Before build
 
-builder.Services.AddControllers();
+            builder.Services.AddControllers();
 
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen();
 
-builder.Configuration
-    .AddJsonFile("hosting.json", false, true);
+            builder.Configuration
+                .AddJsonFile("api.settings.json", false, true)
+                .AddJsonFile("api.hosting.json", false, true);
 
-builder.Services
-    .AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            builder.Services
+                .AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-builder.Services
-    .AddDbContext<CoreContext>(
-        (serviceProvider, options) =>
-            options.UseSqlServer(
-                builder.Configuration["ConnectionStrings:Default"]
-            ),
-        contextLifetime: ServiceLifetime.Scoped,
-        optionsLifetime: ServiceLifetime.Singleton
-    );
+            builder.Services
+                .AddDbContext<CoreContext>(
+                    (serviceProvider, options) =>
+                        options.UseSqlServer(
+                            builder.Configuration["ConnectionStrings:Default"]
+                        ),
+                    contextLifetime: ServiceLifetime.Scoped,
+                    optionsLifetime: ServiceLifetime.Singleton
+                );
 
-builder.Services
-    .RegisterServices();
+            builder.Services
+                .RegisterServices();
 
-#endregion
+            #endregion
 
-var app = builder.Build();
+            var app = builder.Build();
 
-#region After build
+            #region After build
 
-var configuration = app.Services.GetRequiredService<IConfiguration>();
-var loggerFactory = app.Services.GetRequiredService<ILoggerFactory>();
+            var configuration = app.Services.GetRequiredService<IConfiguration>();
+            var loggerFactory = app.Services.GetRequiredService<ILoggerFactory>();
 
-loggerFactory.AddSeq(configuration.GetSection("Logging:Seq"));
-DbContextLogger.LoggerFactory = loggerFactory;
+            loggerFactory.AddSeq(configuration.GetSection("Logging:Seq"));
+            DbContextLogger.LoggerFactory = loggerFactory;
 
-app.UseMiddleware<RequestLoggingMiddleware>();
+            app.UseMiddleware<RequestLoggingMiddleware>();
 
-app.UseSwagger();
-app.UseSwaggerUI();
+            app.UseSwagger();
+            app.UseSwaggerUI();
 
-app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
 
-app.UseAuthorization();
+            app.UseAuthorization();
 
-app.MapControllers();
+            app.MapControllers();
 
-#endregion
+            #endregion
 
+            loggerFactory
+                .CreateLogger("Program")
+                .Warning("API: I started !");
 
-app.Run();
+            return app;
+        }
+    }
+}

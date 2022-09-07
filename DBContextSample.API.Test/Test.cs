@@ -1,5 +1,6 @@
 using DBContextSample.API.Services;
 using DBContextSample.Context;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DBContextSample.API.Test
@@ -44,6 +45,8 @@ namespace DBContextSample.API.Test
         public async Task Http_Test1()
         {
             var response = await _client.GetAsync("/api/people");
+
+            response.EnsureSuccessStatusCode();
 
             var people = await response.Content.ReadAsStringAsync();
         }

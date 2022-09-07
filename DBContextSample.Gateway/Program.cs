@@ -6,37 +6,52 @@ using Microsoft.Extensions.Logging;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 
+namespace DBContextSample.Gateway
+{
+    public partial class Program
+    {
+        public static async Task Main(string[] args)
+            => await GetApp(args).RunAsync();
 
-var builder = WebApplication.CreateBuilder(args);
+        public static WebApplication GetApp(string[] args)
+        {
+            var builder = WebApplication.CreateBuilder(args);
 
-#region Before build
+            #region Before build
 
-builder.Configuration
-    .AddJsonFile("hosting.json", false, true)
-    .AddJsonFile("ocelot.json", false, true);
+            builder.Configuration
+                .AddJsonFile("gateway.settings.json", false, false)
+                .AddJsonFile("gateway.hosting.json", false, false)
+                .AddJsonFile("gateway.ocelot.json", false, false);
 
-builder.Services
-    .AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            builder.Services
+                .AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
-builder.Services
-    .AddOcelot();
+            builder.Services
+                .AddOcelot();
 
-#endregion
+            #endregion
 
-var app = builder.Build();
+            var app = builder.Build();
 
-#region After build
+            #region After build
 
-var configuration = app.Services.GetRequiredService<IConfiguration>();
-var loggerFactory = app.Services.GetRequiredService<ILoggerFactory>();
+            var configuration = app.Services.GetRequiredService<IConfiguration>();
+            var loggerFactory = app.Services.GetRequiredService<ILoggerFactory>();
 
-loggerFactory.AddSeq(configuration.GetSection("Logging:Seq"));
+            loggerFactory.AddSeq(configuration.GetSection("Logging:Seq"));
 
-app.UseMiddleware<RequestLoggingMiddleware>();
+            app.UseMiddleware<RequestLoggingMiddleware>();
 
-app.UseOcelot().Wait();
+            app.UseOcelot().Wait();
 
-#endregion
+            #endregion
 
+            loggerFactory
+                .CreateLogger("Program")
+                .Warning("Gateway: I started !");
 
-app.Run();
+            return app;
+        }
+    }
+}

@@ -6,10 +6,6 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5044
-        },
-        {
-          "Host": "localhost",
           "Port": 5043
         }
       ],
