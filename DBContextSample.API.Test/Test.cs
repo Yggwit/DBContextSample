@@ -11,10 +11,10 @@ namespace DBContextSample.API.Test
         private CoreContext _context;
         private IFakeService _fakeService;
 
-        [SetUp]
-        public void Setup()
+        [OneTimeSetUp]
+        public void OneTimeSetUp()
         {
-            var application = new ApplicationFactory();
+            var application = new InMemoryApplicationFactory("DBContextSample_API_Test");
 
             var scope = application.Services.CreateScope();
 
@@ -22,6 +22,19 @@ namespace DBContextSample.API.Test
 
             _context = scope.ServiceProvider.GetRequiredService<CoreContext>();
             _fakeService = scope.ServiceProvider.GetRequiredService<IFakeService>();
+        }
+
+        [SetUp]
+        public async Task SetUp()
+        {
+            _context.People.Add(
+                new Entities.Entities.Person
+                {
+                    FirstName = "Killian",
+                    LastName = "Charlez"
+                });
+
+            await _context.SaveChangesAsync();
         }
 
 

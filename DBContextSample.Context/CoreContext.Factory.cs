@@ -6,27 +6,27 @@ namespace DBContextSample.Context
     {
         private readonly DbContextOptions<CoreContext> _coreContextOptions;
 
-        /// <summary>
-        /// Used by controller code generator
-        /// </summary>
-        public CoreContextFactory()
-            : this(
-                new DbContextOptionsBuilder<CoreContext>()
-                    .UseSqlServer("Server=.\\DBCONTEXTSAMPLE;Database=Sample;Trusted_Connection=True;Encrypt=False;App=DBContextSample.Scaffold")
-                    .Options
-            )
-        { }
 
         public CoreContextFactory(DbContextOptions<CoreContext> coreContextOptions = null)
             => _coreContextOptions = coreContextOptions;
 
-        /// <summary>
-        /// Used by controller code generator
-        /// </summary>
-        public CoreContext CreateDbContext(string[] args)
+        public CoreContext CoreContext
             => new(_coreContextOptions);
 
-        public CoreContext CoreContext
+
+        /// <summary>
+        /// Used by controller code generator
+        /// Do not use !
+        /// </summary>
+        public CoreContextFactory()
+            : this(new DbContextOptionsBuilder<CoreContext>().UseSqlServer("Empty").Options)
+        { }
+
+        /// <summary>
+        /// Used by controller code generator
+        /// Do not use !
+        /// </summary>
+        public CoreContext CreateDbContext(string[] args)
             => new(_coreContextOptions);
     }
 }

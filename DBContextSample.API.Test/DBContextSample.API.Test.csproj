@@ -31,6 +31,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DBContextSample.API\DBContextSample.API.csproj" />
+    <ProjectReference Include="..\DBContextSample.Context.InMemory\DBContextSample.Context.InMemory.csproj" />
   </ItemGroup>
 
 </Project>

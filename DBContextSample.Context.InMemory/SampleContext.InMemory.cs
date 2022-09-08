@@ -1,20 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DBContextSample.Context.InMemory
 {
-    public class SampleContextInMemory : SampleContext
+    public static class InMemoryContext
     {
-        public SampleContextInMemory(DbContextOptions<SampleContextInMemory> options)
-            : base(options)
-        { }
-
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder
-                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString());
-
-            base.OnConfiguring(optionsBuilder);
-        }
+        public static IServiceCollection AddInMemoryDbContext<TContext>
+            (this IServiceCollection services, string? databaseName = null)
+            where TContext : DbContext
+            => services.AddDbContext<TContext>(options =>
+                options.UseInMemoryDatabase(databaseName: databaseName ?? Guid.NewGuid().ToString())
+            );
     }
 }
