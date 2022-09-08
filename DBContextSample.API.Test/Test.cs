@@ -14,7 +14,9 @@ namespace DBContextSample.API.Test
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            var application = new InMemoryApplicationFactory("DBContextSample_API_Test");
+            var application = 
+                new InMemoryApplicationFactory("DBContextSample_API_Test");
+                //new ApplicationFactory();
 
             var scope = application.Services.CreateScope();
 
@@ -62,6 +64,14 @@ namespace DBContextSample.API.Test
             response.EnsureSuccessStatusCode();
 
             var people = await response.Content.ReadAsStringAsync();
+        }
+
+        [Test]
+        public async Task Http_Test2()
+        {
+            var response = await _client.GetAsync("/api/health");
+
+            response.EnsureSuccessStatusCode();
         }
     }
 }

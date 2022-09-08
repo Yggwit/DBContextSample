@@ -26,6 +26,10 @@ namespace DBContextSample.API
                 .AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             builder.Services
+                .AddHealthChecks()
+                .AddDbContextCheck<CoreContext>();
+
+            builder.Services
                 .AddDbContext<CoreContext>(
                     (serviceProvider, options) =>
                         options.UseSqlServer(
@@ -60,6 +64,8 @@ namespace DBContextSample.API
             app.UseAuthorization();
 
             app.MapControllers();
+
+            app.MapHealthChecks("/api/health");
 
             #endregion
 
