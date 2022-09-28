@@ -14,9 +14,9 @@ namespace DBContextSample.API.Test
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
-            var application = 
+            var application =
                 new InMemoryApplicationFactory("DBContextSample_API_Test");
-                //new ApplicationFactory();
+            //new ApplicationFactory();
 
             var scope = application.Services.CreateScope();
 
