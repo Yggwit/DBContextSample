@@ -10,37 +10,26 @@ namespace DBContextSample.API.Controllers
         private readonly CoreContext _context;
 
         public PeopleController(CoreContext context)
-        {
-            _context = context;
-        }
+            => _context = context;
+
 
         // GET: api/People
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Person>>> GetPeople()
-        {
-            if (_context.People == null)
-            {
-                return NotFound();
-            }
-            return await _context.People.ToListAsync();
-        }
+            => _context.People is not null
+                ? await _context.People.ToListAsync()
+                : NotFound();
 
         // GET: api/People/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Person>> GetPerson(int id)
         {
-            if (_context.People == null)
-            {
+            if (_context.People is null)
                 return NotFound();
-            }
-            var person = await _context.People.FindAsync(id);
 
-            if (person == null)
-            {
-                return NotFound();
-            }
-
-            return person;
+            return await _context.People.FindAsync(id) is Person person
+                ? person
+                : NotFound();
         }
 
         // PUT: api/People/5
@@ -49,9 +38,7 @@ namespace DBContextSample.API.Controllers
         public async Task<IActionResult> PutPerson(int id, Person person)
         {
             if (id != person.Id)
-            {
                 return BadRequest();
-            }
 
             _context.Entry(person).State = EntityState.Modified;
 
@@ -62,13 +49,9 @@ namespace DBContextSample.API.Controllers
             catch (DbUpdateConcurrencyException)
             {
                 if (!PersonExists(id))
-                {
-                    return NotFound();
-                }
+                    NotFound();
                 else
-                {
                     throw;
-                }
             }
 
             return NoContent();
@@ -79,10 +62,9 @@ namespace DBContextSample.API.Controllers
         [HttpPost]
         public async Task<ActionResult<Person>> PostPerson(Person person)
         {
-            if (_context.People == null)
-            {
+            if (_context.People is null)
                 return Problem("Entity set 'CoreContext.People'  is null.");
-            }
+
             _context.People.Add(person);
             await _context.SaveChangesAsync();
 
@@ -93,25 +75,23 @@ namespace DBContextSample.API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePerson(int id)
         {
-            if (_context.People == null)
-            {
+            if (_context.People is null)
                 return NotFound();
-            }
-            var person = await _context.People.FindAsync(id);
-            if (person == null)
+
+            if (await _context.People.FindAsync(id) is Person person)
             {
-                return NotFound();
+                _context.People.Remove(person);
+                await _context.SaveChangesAsync();
+
+                return NoContent();
             }
-
-            _context.People.Remove(person);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            else
+                return NotFound();
         }
 
         private bool PersonExists(int id)
-        {
-            return (_context.People?.Any(e => e.Id == id)).GetValueOrDefault();
-        }
+            => _context.People
+                ?.Any(e => e.Id == id)
+                ?? default;
     }
 }

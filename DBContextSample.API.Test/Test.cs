@@ -7,9 +7,9 @@ namespace DBContextSample.API.Test
 {
     public class Test
     {
-        private HttpClient _client;
-        private CoreContext _context;
-        private IFakeService _fakeService;
+        private HttpClient _client = default!;
+        private CoreContext _context = default!;
+        private IFakeService _fakeService = default!;
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
