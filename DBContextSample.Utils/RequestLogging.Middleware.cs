@@ -23,10 +23,9 @@ namespace DBContextSample.Utils
         {
             DateTime startTime = DateTime.UtcNow;
 
-            MemoryStream? injectedRequestStream = null;
-            string? parameters = (context.Request.ContentLength ?? 0) > 0
-                ? GetRequestBody(context, out injectedRequestStream)
-                : context.Request.QueryString.Value;
+            (string? parameters, MemoryStream? injectedRequestStream) = (context.Request.ContentLength ?? 0) > 0
+                ? await GetRequestBody(context)
+                : (context.Request.QueryString.Value, null);
 
             Stopwatch watch = Stopwatch.StartNew();
 
@@ -57,15 +56,15 @@ namespace DBContextSample.Utils
             }
         }
 
-        private string GetRequestBody(HttpContext context, out MemoryStream injectedRequestStream)
+        private async Task<(string body, MemoryStream injectedRequestStream)> GetRequestBody(HttpContext context)
         {
             string body = string.Empty;
-            injectedRequestStream = new MemoryStream();
+           MemoryStream injectedRequestStream = new ();
 
             try
             {
                 using StreamReader bodyReader = new(context.Request.Body);
-                body = bodyReader.ReadToEnd();
+                body = await bodyReader.ReadToEndAsync();
 
                 byte[] bytesToWrite = Encoding.UTF8.GetBytes(body);
                 injectedRequestStream.Write(bytesToWrite, 0, bytesToWrite.Length);
@@ -81,7 +80,7 @@ namespace DBContextSample.Utils
                 );
             }
 
-            return body;
+            return (body, injectedRequestStream);
         }
 
         private void LogRequest(RequestLogging request)

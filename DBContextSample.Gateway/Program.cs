@@ -49,7 +49,7 @@ namespace DBContextSample.Gateway
 
             loggerFactory
                 .CreateLogger("Program")
-                .Warning("Gateway: I started !");
+                .Warning("I started !");
 
             return app;
         }

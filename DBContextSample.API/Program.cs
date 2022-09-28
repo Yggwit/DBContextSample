@@ -71,7 +71,7 @@ namespace DBContextSample.API
 
             loggerFactory
                 .CreateLogger("Program")
-                .Warning("API: I started !");
+                .Warning("I started !");
 
             return app;
         }

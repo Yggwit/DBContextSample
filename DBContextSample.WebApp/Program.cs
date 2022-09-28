@@ -40,5 +40,8 @@ app.MapRazorPages();
 
 #endregion
 
+loggerFactory
+    .CreateLogger("Program")
+    .Warning("I started !");
 
 app.Run();
