@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace DBContextSample.Entities.Entities
 {
     [Table("Person")]
-    public partial class Person
+    public partial class Person : EntityBase
     {
         public Person()
             => EntityConstructorPartial();

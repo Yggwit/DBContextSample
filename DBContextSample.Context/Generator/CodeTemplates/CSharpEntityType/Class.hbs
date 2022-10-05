@@ -10,7 +10,7 @@ namespace {{namespace}}
     {{#each class-annotations}}
     {{{class-annotation}}}
     {{/each}}
-    public partial class {{class}}
+    public partial class {{class}} : EntityBase
     {
         {{{> constructor}}}
         {{{> properties}}}
