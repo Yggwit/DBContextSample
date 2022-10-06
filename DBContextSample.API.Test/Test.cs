@@ -46,6 +46,8 @@ namespace DBContextSample.API.Test
         {
             var people = await _fakeService
                 .GetPeople();
+
+            Assert.That(people, Is.Not.Null);
         }
 
         [Test]
@@ -54,6 +56,8 @@ namespace DBContextSample.API.Test
             var people = await _context.People
                 .AsNoTracking()
                 .ToListAsync();
+
+            Assert.That(people, Is.Not.Null);
         }
 
 
@@ -65,6 +69,8 @@ namespace DBContextSample.API.Test
             response.EnsureSuccessStatusCode();
 
             var people = await response.Content.ReadAsStringAsync();
+
+            Assert.That(people, Is.Not.Null);
         }
 
         [Test]
@@ -79,6 +85,8 @@ namespace DBContextSample.API.Test
         [Test]
         public void AddWithDefaultValues()
         {
+            Exception? ex = null;
+
             try
             {
                 _context.People.AddWithDefaultValues(new Person(), new object { });
@@ -87,16 +95,18 @@ namespace DBContextSample.API.Test
 
                 List<Person> p = _context.People.ToList();
             }
-            catch (Exception ex)
+            catch (Exception _ex)
             {
-                throw;
+                ex = _ex;
             }
+
+            Assert.That(ex, Is.Null);
         }
     }
 
     public static class AddWithDefaultValuesExtension
     {
-        public static void AddWithDefaultValues<T, U>(this DbSet<T> dbSet, T entity, U classToMap)
+        public static void AddWithDefaultValues<T, U>(this DbSet<T> dbSet, T entity, U _)
             where T : class, IEntityBase
         {
             entity.Guid = Guid.NewGuid();
