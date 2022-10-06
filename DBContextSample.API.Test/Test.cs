@@ -1,5 +1,6 @@
 using DBContextSample.API.Services;
 using DBContextSample.Context;
+using DBContextSample.Entities.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -15,8 +16,8 @@ namespace DBContextSample.API.Test
         public void OneTimeSetUp()
         {
             var application =
-                new InMemoryApplicationFactory("DBContextSample_API_Test");
-            //new ApplicationFactory();
+                //new InMemoryApplicationFactory("DBContextSample_API_Test");
+                new ApplicationFactory();
 
             var scope = application.Services.CreateScope();
 
@@ -72,6 +73,37 @@ namespace DBContextSample.API.Test
             var response = await _client.GetAsync("/api/health");
 
             response.EnsureSuccessStatusCode();
+        }
+
+
+        [Test]
+        public void AddWithDefaultValues()
+        {
+            try
+            {
+                _context.People.AddWithDefaultValues(new Person(), new object { });
+
+                _context.SaveChanges();
+
+                List<Person> p = _context.People.ToList();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+    }
+
+    public static class AddWithDefaultValuesExtension
+    {
+        public static void AddWithDefaultValues<T, U>(this DbSet<T> dbSet, T entity, U classToMap)
+            where T : class, IEntityBase
+        {
+            entity.Guid = Guid.NewGuid();
+
+            // automapper U => T
+
+            dbSet.Add(entity);
         }
     }
 }

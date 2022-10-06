@@ -12,6 +12,21 @@ namespace DBContextSample.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Person>(entity =>
+            {
+                entity.ToTable(tb => tb.IsTemporal(ttb =>
+                    {
+                        ttb.UseHistoryTable("Person_history", "dbo");
+                        ttb
+                            .HasPeriodStart("StartTime")
+                            .HasColumnName("StartTime");
+                        ttb
+                            .HasPeriodEnd("EndTime")
+                            .HasColumnName("EndTime");
+                    }
+                ));
+            });
+
             OnModelCreatingPartial(modelBuilder);
         }
 

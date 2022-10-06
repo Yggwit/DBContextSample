@@ -8,6 +8,7 @@
    "ModelNamespace": "Entities.Entities",
    "OutputContextPath": "SampleContext",
    "OutputPath": "..\\DBContextSample.Entities\\Entities",
+   "PreserveCasingWithRegex": true,
    "ProjectRootNamespace": "DBContextSample",
    "Schemas": null,
    "SelectedHandlebarsLanguage": 0,
@@ -35,5 +36,6 @@
    "UseNodaTime": false,
    "UseNullableReferences": false,
    "UseSchemaFolders": false,
-   "UseSpatial": false
+   "UseSpatial": false,
+   "UseT4": false
 }

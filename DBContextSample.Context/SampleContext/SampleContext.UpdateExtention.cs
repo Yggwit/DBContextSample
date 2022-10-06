@@ -32,7 +32,7 @@ namespace DBContextSample.Context
         }
 
         public static int Update<T>(this IQueryable<T> query, Expression<Func<T, T>> updateExpression)
-            where T : EntityBase, new()
+            where T : IEntityBase, new()
         {
             SampleContext context = (SampleContext)BatchUtil.GetDbContext(query);
             System.Type type = typeof(T);

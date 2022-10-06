@@ -1,0 +1,49 @@
+<div class="card card-big">
+    <div class="card-header">
+        {{ title }}
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-2">Filter</div>
+            <div class="col-md-4">
+                <input type="text">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">Filtered by</div>
+        </div>
+        <div class="table-responsive"
+             *ngIf="products.length">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            <button class="btn btn-primary"
+                                (click)="toggleImages()">
+                                {{ displayImages ? 'hide images' : 'Show images' }}
+                            </button>
+                        </th>
+                        <th>Product</th>
+                        <th>Code</th>
+                        <th>Available</th>
+                        <th>Price</th>
+                        <th>Rating</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let product of products">
+                        <td>
+                            <img *ngIf="displayImages"
+                                 [src]="product.imgUrl">
+                        </td>
+                        <td>{{product.name}}</td>
+                        <td>{{product.code}}</td>
+                        <td>{{product.releaseDate}}</td>
+                        <td>{{product.price}}</td>
+                        <td>{{product.rating}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

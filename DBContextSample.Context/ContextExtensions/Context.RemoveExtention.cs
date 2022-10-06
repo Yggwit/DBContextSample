@@ -5,7 +5,7 @@ namespace DBContextSample.Context
     public static class ContextRemoveExtention
     {
         public static void Remove<T>(this DbSet<T> entities, System.Linq.Expressions.Expression<Func<T, bool>> predicate)
-            where T : EntityBase
+            where T : class, IEntityBase
             => entities.RemoveRange(
                 entities
                     .Where(predicate)
@@ -13,7 +13,7 @@ namespace DBContextSample.Context
             );
 
         public static async Task RemoveAsync<T>(this DbSet<T> entities, System.Linq.Expressions.Expression<Func<T, bool>> predicate)
-            where T : EntityBase
+            where T : class, IEntityBase
             => entities.RemoveRange(
                 await entities
                     .Where(predicate)
