@@ -17,7 +17,9 @@ namespace DBContextSample.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Person>>> GetPeople()
             => _context.People is not null
-                ? await _context.People.ToListAsync()
+                ? await _context.People
+                    .AsNoTracking()
+                    .ToListAsync()
                 : NotFound();
 
         // GET: api/People/5
