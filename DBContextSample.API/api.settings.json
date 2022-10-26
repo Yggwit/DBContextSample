@@ -13,5 +13,10 @@
   },
   "ConnectionStrings": {
     "Default": "Server=.\\DBCONTEXTSAMPLE;Database=Sample;Trusted_Connection=True;Encrypt=False;App=DBContextSample.API"
+  },
+  "Sieve": {
+    "CaseSensitive": false,
+    "DefaultPageSize": 10,
+    "IgnoreNullsOnNotEqual": true
   }
 }

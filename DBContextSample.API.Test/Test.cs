@@ -11,6 +11,7 @@ namespace DBContextSample.API.Test
         private HttpClient _client = default!;
         private CoreContext _context = default!;
         private IFakeService _fakeService = default!;
+        private FilterService _filterService = default!;
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
@@ -27,6 +28,7 @@ namespace DBContextSample.API.Test
 
                 _context = scope.ServiceProvider.GetRequiredService<CoreContext>();
                 _fakeService = scope.ServiceProvider.GetRequiredService<IFakeService>();
+                _filterService = scope.ServiceProvider.GetRequiredService<FilterService>();
             }
             catch (Exception ex)
             {
@@ -39,14 +41,14 @@ namespace DBContextSample.API.Test
         {
             try
             {
-                _context.People.Add(
-                    new Person
-                    {
-                        FirstName = "Killian",
-                        LastName = "Charlez"
-                    });
+                //_context.People.Add(
+                //    new Person
+                //    {
+                //        FirstName = "Killian",
+                //        LastName = "Charlez"
+                //    });
 
-                await _context.SaveChangesAsync();
+                //await _context.SaveChangesAsync();
             }
             catch (Exception ex)
             {

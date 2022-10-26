@@ -1,4 +1,7 @@
 using DBContextSample.API.Services;
+using DBContextSample.API.Sieve;
+using Sieve.Models;
+using Sieve.Services;
 
 namespace DBContextSample.API
 {
@@ -41,6 +44,10 @@ namespace DBContextSample.API
 
             builder.Services
                 .RegisterServices();
+
+
+            builder.Services.Configure<SieveOptions>(builder.Configuration.GetSection("Sieve"));
+            builder.Services.AddScoped<ISieveProcessor, ApplicationSieveProcessor>();
 
             #endregion
 

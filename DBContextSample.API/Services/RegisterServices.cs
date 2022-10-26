@@ -4,6 +4,7 @@
     {
         public static IServiceCollection RegisterServices(this IServiceCollection services)
             => services
-                .AddScoped<IFakeService, FakeService>();
+                .AddScoped<IFakeService, FakeService>()
+                .AddScoped<FilterService>();
     }
 }

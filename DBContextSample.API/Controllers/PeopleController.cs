@@ -1,4 +1,6 @@
-﻿using DBContextSample.Entities.Entities;
+﻿using DBContextSample.API.Services;
+using DBContextSample.API.Sieve;
+using DBContextSample.Entities.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DBContextSample.API.Controllers
@@ -8,21 +10,23 @@ namespace DBContextSample.API.Controllers
     public class PeopleController : ControllerBase
     {
         private readonly CoreContext _context;
+        private readonly FilterService _filterService;
 
-        public PeopleController(CoreContext context)
-            => _context = context;
+        public PeopleController(CoreContext context, FilterService filterService)
+        {
+            _context = context;
+            _filterService = filterService;
+        }
 
 
-        // GET: api/People
+        // GET: api/people?sorts=-firstName&page=1&pageSize=50&fields=firstName,lastName
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Person>>> GetPeople()
+        public async Task<ActionResult<IEnumerable<object>>> GetPeople([FromQuery] FilterModel<Person> filter)
             => _context.People is not null
-                ? await _context.People
-                    .AsNoTracking()
-                    .ToListAsync()
+                ? await _filterService.Filter<Person>(filter)
                 : NotFound();
 
-        // GET: api/People/5
+
         [HttpGet("{id}")]
         public async Task<ActionResult<Person>> GetPerson(int id)
         {
@@ -34,8 +38,6 @@ namespace DBContextSample.API.Controllers
                 : NotFound();
         }
 
-        // PUT: api/People/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutPerson(int id, Person person)
         {
@@ -59,8 +61,6 @@ namespace DBContextSample.API.Controllers
             return NoContent();
         }
 
-        // POST: api/People
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<Person>> PostPerson(Person person)
         {
@@ -73,7 +73,6 @@ namespace DBContextSample.API.Controllers
             return CreatedAtAction("GetPerson", new { id = person.Id }, person);
         }
 
-        // DELETE: api/People/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePerson(int id)
         {
