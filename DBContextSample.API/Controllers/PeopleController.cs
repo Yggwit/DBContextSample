@@ -1,4 +1,5 @@
-﻿using DBContextSample.API.Services;
+﻿using DBContextSample.API.Models;
+using DBContextSample.API.Services;
 using DBContextSample.API.Sieve;
 using DBContextSample.Entities.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -10,9 +11,9 @@ namespace DBContextSample.API.Controllers
     public class PeopleController : ControllerBase
     {
         private readonly CoreContext _context;
-        private readonly FilterService _filterService;
+        private readonly FilterService<CoreContext> _filterService;
 
-        public PeopleController(CoreContext context, FilterService filterService)
+        public PeopleController(CoreContext context, FilterService<CoreContext> filterService)
         {
             _context = context;
             _filterService = filterService;
@@ -21,9 +22,9 @@ namespace DBContextSample.API.Controllers
 
         // GET: api/people?sorts=-firstName&page=1&pageSize=50&fields=firstName,lastName
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<object>>> GetPeople([FromQuery] FilterModel<Person> filter)
+        public async Task<ActionResult<FilterResult<PersonResult>>> GetPeople([FromQuery] FilterModel<PersonResult> filter)
             => _context.People is not null
-                ? await _filterService.Filter<Person>(filter)
+                ? await _filterService.Filter<VwPerson, PersonResult>(filter)
                 : NotFound();
 
 

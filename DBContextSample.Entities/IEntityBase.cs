@@ -2,6 +2,5 @@
 {
     public interface IEntityBase
     {
-        public Guid Guid { get; set; }
     }
 }

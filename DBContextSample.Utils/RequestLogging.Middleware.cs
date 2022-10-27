@@ -59,7 +59,7 @@ namespace DBContextSample.Utils
         private async Task<(string body, MemoryStream injectedRequestStream)> GetRequestBody(HttpContext context)
         {
             string body = string.Empty;
-           MemoryStream injectedRequestStream = new ();
+            MemoryStream injectedRequestStream = new();
 
             try
             {

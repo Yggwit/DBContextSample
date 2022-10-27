@@ -11,7 +11,7 @@ namespace DBContextSample.API.Test
         private HttpClient _client = default!;
         private CoreContext _context = default!;
         private IFakeService _fakeService = default!;
-        private FilterService _filterService = default!;
+        private FilterService<CoreContext> _filterService = default!;
 
         [OneTimeSetUp]
         public void OneTimeSetUp()
@@ -28,7 +28,7 @@ namespace DBContextSample.API.Test
 
                 _context = scope.ServiceProvider.GetRequiredService<CoreContext>();
                 _fakeService = scope.ServiceProvider.GetRequiredService<IFakeService>();
-                _filterService = scope.ServiceProvider.GetRequiredService<FilterService>();
+                _filterService = scope.ServiceProvider.GetRequiredService<FilterService<CoreContext>>();
             }
             catch (Exception ex)
             {
@@ -157,7 +157,7 @@ namespace DBContextSample.API.Test
         public static void AddWithDefaultValues<T, U>(this DbSet<T> dbSet, T entity, U _)
             where T : class, IEntityBase
         {
-            entity.Guid = Guid.NewGuid();
+            //entity.Guid = Guid.NewGuid();
 
             // automapper U => T
 

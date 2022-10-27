@@ -17,6 +17,10 @@
       {
          "Name": "[dbo].[Person]",
          "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[VW_Person]",
+         "ObjectType": 3
       }
    ],
    "UiHint": "LKCH39LF\\DBCONTEXTSAMPLE.Sample",

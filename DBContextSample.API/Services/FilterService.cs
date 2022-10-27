@@ -1,38 +1,62 @@
-﻿using DBContextSample.API.Sieve;
+﻿using DBContextSample.API.Models;
+using DBContextSample.API.Sieve;
 using DBContextSample.Entities.Entities;
-using Sieve.Models;
 using Sieve.Services;
 using System.Linq.Dynamic.Core;
 
 namespace DBContextSample.API.Services
 {
-    public class FilterService
+    public class FilterService<C>
+        where C : DbContext
     {
-        private readonly CoreContext _context;
+        private readonly DbContext _context;
         private readonly ISieveProcessor _sieveProcessor;
 
-        public FilterService(CoreContext context, ISieveProcessor sieveProcessor)
+        public FilterService(C context, ISieveProcessor sieveProcessor)
         {
             _context = context;
             _sieveProcessor = sieveProcessor;
         }
 
-        public async Task<List<object>> Filter<T>(FilterModel<T>? filter = null)
-            where T : class, IEntityBase
+        public async Task<FilterResult<R>> Filter<E, R>(FilterModel<R> filter)
+            where E : class, IEntityBase
+            where R : class, IFilterResult
         {
-            IQueryable<T> query = _context.Set<T>()
+            IQueryable<E> query = _context.Set<E>()
                 .AsNoTracking();
+            int count = default;
 
-            if (filter is SieveModel sieveModel)
-                query = _sieveProcessor
-                    .Apply(sieveModel, query);
+            if (
+                filter.IncludeTotalCount
+                || (
+                    filter.IncludePageCount
+                    && (filter.PageSize ?? 0) > 0
+                )
+            )
+                count = await _sieveProcessor
+                   .Apply(filter, query, applyPagination: false, applySorting: false)
+                   .CountAsync();
 
-            return string.IsNullOrEmpty(filter?.Fields)
-                ? await query
-                    .ToListAsync<object>()
-                : await query
-                    .Select($"new {{{filter.Fields}}}")
-                    .ToDynamicListAsync();
+            query = _sieveProcessor
+                .Apply(filter, query);
+
+            List<R> result = await query
+                .Select<R>($"new {{{filter.Fields}}}")
+                .ToDynamicListAsync<R>();
+
+            return new FilterResult<R>
+            {
+                TotalCount = filter.IncludeTotalCount
+                    ? count
+                    : null,
+                PageCount = filter.IncludePageCount
+                    ? (filter.PageSize ?? 0) > 0
+                        ? (int)Math.Ceiling(count / (decimal)filter.PageSize!)
+                        : 1
+                    : null,
+
+                Results = result
+            };
         }
     }
 }

@@ -16,7 +16,7 @@
   },
   "Sieve": {
     "CaseSensitive": false,
-    "DefaultPageSize": 10,
+    "DefaultPageSize": 0,
     "IgnoreNullsOnNotEqual": true
   }
 }

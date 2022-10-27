@@ -5,6 +5,6 @@
         public static IServiceCollection RegisterServices(this IServiceCollection services)
             => services
                 .AddScoped<IFakeService, FakeService>()
-                .AddScoped<FilterService>();
+                .AddScoped<FilterService<CoreContext>>();
     }
 }

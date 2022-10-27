@@ -5,6 +5,7 @@ namespace DBContextSample.Context
     public abstract partial class SampleContext : DbContext
     {
         public virtual DbSet<Person> People { get; set; }
+        public virtual DbSet<VwPerson> VwPeople { get; set; }
 
         public SampleContext(DbContextOptions<SampleContext> options) : base(options)
         {
@@ -25,6 +26,13 @@ namespace DBContextSample.Context
                             .HasColumnName("EndTime");
                     }
                 ));
+            });
+
+            modelBuilder.Entity<VwPerson>(entity =>
+            {
+                entity.ToView("VW_Person");
+
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
             });
 
             OnModelCreatingPartial(modelBuilder);

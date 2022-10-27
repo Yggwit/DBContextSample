@@ -7,10 +7,10 @@ namespace DBContextSample.API.Sieve
     {
         public void Configure(SievePropertyMapper mapper)
         {
-            mapper.Property<Person>(p => p.FirstName)
+            mapper.Property<VwPerson>(p => p.FirstName)
                 .CanSort()
                 .CanFilter();
-            mapper.Property<Person>(p => p.LastName)
+            mapper.Property<VwPerson>(p => p.LastName)
                 .CanSort()
                 .CanFilter();
         }
